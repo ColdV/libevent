@@ -50,6 +50,8 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 string(REGEX MATCH "SunOS" SOLARIS "${CMAKE_SYSTEM_NAME}")
 
 
+add_definitions(-g)
+
 include(CheckTypeSize)
 include(CheckFunctionExistsEx)
 include(CheckFileOffsetBits)
@@ -325,6 +327,8 @@ if (APPLE)
         -Qunused-arguments
     )
 endif()
+
+#list(APPEND __FLASG -g )
 
 # Winsock.
 if(WIN32)

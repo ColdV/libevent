@@ -2539,6 +2539,13 @@ int
 evbuffer_write_atmost(struct evbuffer *buffer, evutil_socket_t fd,
     ev_ssize_t howmuch)
 {
+	int sendbuf = 0;
+	socklen_t sizebuf = sizeof(int);
+	if (getsockopt(fd, SOL_SOCKET, SO_RCVBUF, (char*)&sendbuf, &sizebuf))
+		return 0;
+
+	printf("fd:%d, recv buf:%d\n", fd, sendbuf);
+
 	int n = -1;
 
 	EVBUFFER_LOCK(buffer);
